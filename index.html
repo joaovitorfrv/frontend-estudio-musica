@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio de Música</title>
+
+    <link rel="website icon" type="png"
+    href="api_icon.png">     
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <!-- Cabeçalho da página (Título e Logo)-->
+        <div class="logo" alt="disc-image">
+            <img src="images/api_icon.png">
+        </div>
+        <div class="title" alt="title-text">
+            <h1>Estúdio de Música</h1>
+        </div>
+    </header>
+    <body>
+        <!-- Atributos para cadastrar um novo cliente -->
+         <div class="addClient">
+            <input type="text" id="full-name" placeholder="Nome Completo">
+            <input type="date" id="birth" placeholder="Data de Nascimento">      
+            <input type="text" id="email" placeholder="E-mail">
+            <input type="tel" id="cell-no" placeholder="Cel: ">
+            <input type="text" id="instrumentos" placeholder="Toca algum instrumento?">
+            <button id="add-btn" onclick="newItem()">ADICIONAR</button>        
+        </div>
+
+        <!-- Campo de busca -->
+        <div class="searchClient">
+            <input type="text" id="search-input" placeholder="Buscar cliente por nome" oninput="searchClient()">
+        </div>
+
+        <!-- Tabela de visualização -->
+        <div class = "tableView">
+            <table id="clientTable">
+                <tr>
+                    <th>Nome</th>
+                    <th>Data Nasc.</th>
+                    <th>E-mail</th>
+                    <th>Contato</th>
+                    <th>Instrumentos</th>
+                    <th> - </th>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+    <script src="script.js"></script>
+</body>
+</html>
