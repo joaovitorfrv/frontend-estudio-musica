@@ -45,20 +45,20 @@ const postItem = async (inputName, inputBirth, inputEmail, inputCellNo, inputIns
 // Atualiza um cliente através da requisição PUT
 const updateClient = async (id, inputName, inputBirth, inputEmail, inputCellNo, inputInstrumentos) => {
   const formData = new FormData();
-  formData.append('id', id);
+  formData.append('id', id);  // Inclui o ID
   formData.append('nome', inputName);
   formData.append('data_nasc', inputBirth);
   formData.append('email', inputEmail);
   formData.append('celular', inputCellNo);
   formData.append('instrumentos', inputInstrumentos);
 
-  const url = `http://127.0.0.1:5000/cliente`;
+  const url = `http://127.0.0.1:5000/cliente`;  // Não é necessário o ID na URL
   try {
     const response = await fetch(url, { method: 'PUT', body: formData });
     if (response.ok) {
       const data = await response.json();
       console.log('Cliente atualizado com sucesso:', data);
-      alert(`Cliente ${data.id} atualizado com sucesso.`);
+      alert(`Cliente atualizado com sucesso.`);
     } else {
       throw new Error('Erro ao atualizar o cliente');
     }
@@ -66,6 +66,7 @@ const updateClient = async (id, inputName, inputBirth, inputEmail, inputCellNo, 
     console.error('Erro ao atualizar o cliente:', error);
   }
 };
+
 
 // Deleta um cliente via ID
 const deleteClient = async (id) => {
@@ -93,12 +94,15 @@ const newItem = () => {
   const inputCellNo = document.getElementById("cell-no").value;
   const inputInstrumentos = document.getElementById("instrumentos").value;
 
+  // Validação de campos
   if (!validateForm(inputName, inputCellNo)) return;
 
+  // Se estamos em modo de edição
   if (editMode && currentClientId) {
     updateClient(currentClientId, inputName, inputBirth, inputEmail, inputCellNo, inputInstrumentos)
       .then(() => {
-        getList();  // Atualiza a tabela depois de atualizar o cliente
+        alert("Cliente atualizado com sucesso.");
+        getList();  // Atualiza a tabela
       })
       .catch(error => console.error('Erro ao atualizar o cliente:', error));
   } else {
@@ -110,8 +114,9 @@ const newItem = () => {
       .catch(error => console.error('Erro ao cadastrar o cliente:', error));
   }
 
-  resetForm();
+  resetForm();  // Limpa o formulário
 };
+
 
 // Valida entradas do formulário
 const validateForm = (name, cellNo) => {
@@ -179,11 +184,12 @@ const insertEditButton = (parent, id, nome, data_nasc, email, celular, instrumen
     document.getElementById("cell-no").value = celular;
     document.getElementById("instrumentos").value = instrumentos;
 
-    currentClientId = id;
-    editMode = true;
-    document.getElementById("add-btn").textContent = "SALVAR ALTERAÇÕES";
+    currentClientId = id;  // Salva o ID do cliente atual
+    editMode = true;  // Ativa o modo de edição
+    document.getElementById("add-btn").textContent = "SALVAR ALTERAÇÕES";  // Muda o botão para 'Salvar'
   };
 };
+
 
 // Insere o botão de excluir na linha da tabela
 const insertDeleteButton = (parent, id) => {
